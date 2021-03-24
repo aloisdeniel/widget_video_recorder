@@ -1,6 +1,6 @@
 name: widget_video_recorder
 description: A new flutter plugin project.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/aloisdeniel/widget_video_recorder
 
 environment:

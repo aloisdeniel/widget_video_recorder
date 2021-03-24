@@ -122,7 +122,7 @@ final processor = WidgetRecorderVideoProcessor();
 final file = processor.video;
 ```
 
-# Platform compatibility
+#### Platform compatibility
 
 - [X] macOS - `.mov` - HEVC with transparency encoding - native APIs
 - [X] iOS *(should be easy to add)*
@@ -141,7 +141,7 @@ final processor = WidgetRecorderPngProcessor();
 final files = processor.pngImages;
 ```
 
-# Platform compatibility
+#### Platform compatibility
 
 - [X] macOS
 - [X] iOS
@@ -160,7 +160,7 @@ final processor = WidgetRecorderArchiveProcessor();
 final archive = processor.archive;
 ```
 
-# Platform compatibility
+#### Platform compatibility
 
 - [X] macOS
 - [X] iOS
