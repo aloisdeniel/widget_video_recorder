@@ -1,0 +1,15 @@
+import 'dart:io';
+
+import '../platform.dart';
+import 'png.dart';
+
+class WidgetRecorderVideoProcessor extends WidgetRecorderPngProcessor {
+  File? _video;
+  File get video => _video!;
+
+  @override
+  Future<void> complete() async {
+    await super.complete();
+    _video = await WidgetVideoRecorderPlugin.buildVideo(pngFiles);
+  }
+}
