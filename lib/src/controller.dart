@@ -1,12 +1,17 @@
 part of 'recorder.dart';
 
+enum RecordMode {
+  forward,
+  reverse,
+}
+
 class WidgetRecorderController extends ChangeNotifier {
-  void start() {
+  void start([RecordMode mode = RecordMode.forward]) {
     if (_state == null) {
       throw Exception(
           'The controller should be affected to a widget recorder.');
     }
-    _state!._start();
+    _state!._start(mode);
   }
 
   bool _isRendering = false;

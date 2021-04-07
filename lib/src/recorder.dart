@@ -42,12 +42,12 @@ class WidgetRecorder extends StatefulWidget {
 class _WidgetRecorderState extends State<WidgetRecorder> {
   GlobalKey previewContainer = GlobalKey();
 
-  Future<void> _start() async {
+  Future<void> _start(RecordMode mode) async {
     assert(!widget.controller.isRendering);
     widget.onStarted?.call();
     widget.controller._updateRendering(true);
     await widget.processor.start();
-    await renderFrame(0);
+    await renderFrame(0, mode);
     widget.onProgress?.call(0.0);
     widget.controller._updateProgress(0.0);
   }
@@ -70,9 +70,10 @@ class _WidgetRecorderState extends State<WidgetRecorder> {
     return _valueForIndex(index) * 0.8;
   }
 
-  Future<void> renderFrame(int index) async {
-    final newValue = _valueForIndex(index);
+  Future<void> renderFrame(int index, RecordMode mode) async {
+    var newValue = _valueForIndex(index);
     final lastFrame = newValue >= 1;
+    newValue = 1.0 - newValue;
 
     widget.animationController.value = newValue.clamp(0, 1);
     setState(() {});
@@ -90,7 +91,7 @@ class _WidgetRecorderState extends State<WidgetRecorder> {
     widget.onProgress?.call(progress);
     widget.controller._updateProgress(progress);
     if (!lastFrame) {
-      renderFrame(index + 1);
+      renderFrame(index + 1, mode);
     } else {
       await widget.processor.complete();
       widget.onCompleted?.call();
