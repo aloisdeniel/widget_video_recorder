@@ -73,7 +73,9 @@ class _WidgetRecorderState extends State<WidgetRecorder> {
   Future<void> renderFrame(int index, RecordMode mode) async {
     var newValue = _valueForIndex(index);
     final lastFrame = newValue >= 1;
-    newValue = 1.0 - newValue;
+    if (mode == RecordMode.reverse) {
+      newValue = 1.0 - newValue;
+    }
 
     widget.animationController.value = newValue.clamp(0, 1);
     setState(() {});
