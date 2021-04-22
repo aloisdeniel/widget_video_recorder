@@ -47,6 +47,7 @@ public class WidgetVideoRecorderPlugin: NSObject, FlutterPlugin, SpitfireDelegat
                         throw VideoExportError.failed("Failed gif export")
                     }
                     result(url.absoluteString);
+                    self.videoResult = nil;
                     
                 }
                 else {

@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Fixed issues after one gif export.
+
 ## 0.2.0
 
 * Added gif and h264 video export options.
