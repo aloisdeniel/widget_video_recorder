@@ -29,7 +29,9 @@ class _RecorderExampleState extends State<RecorderExample>
     with TickerProviderStateMixin {
   AnimationController? controller;
   WidgetRecorderController? recorderController;
-  WidgetRecorderVideoProcessor videoProcessor = WidgetRecorderVideoProcessor();
+  WidgetRecorderVideoProcessor videoProcessor = WidgetRecorderVideoProcessor(
+    format: RecordVideoFormat.gif,
+  );
 
   @override
   void initState() {

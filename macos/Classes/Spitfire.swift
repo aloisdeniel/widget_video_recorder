@@ -40,6 +40,7 @@ public class Spitfire {
     ///   - images: [UIimage], all images must be the same size
     ///   - fps: Framerate, default value is 30 & must be 1...60
     public func makeVideo(with images: [String],
+                          format: VideoDataFormat,
                           fps: Int32 = 30) throws {
         
         let imageURL = URL(fileURLWithPath: images.first!);
@@ -69,7 +70,8 @@ public class Spitfire {
         
         let videoData = VideoData(fps: fps,
                                   size: size,
-                                  url: outputURL)
+                                  url: outputURL,
+                                  format: format)
 
         try? FileManager.default.removeItem(at: videoData.url)
         

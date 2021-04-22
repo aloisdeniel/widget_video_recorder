@@ -36,9 +36,22 @@ public class WidgetVideoRecorderPlugin: NSObject, FlutterPlugin, SpitfireDelegat
       self.videoResult = result;
         
         if let arguments = call.arguments as? Dictionary<String, Any> {
+            let format = arguments["format"] as? String;
             if let imagePaths = arguments["images"] as? [String] {
+                
                 do {
-                    try spitfire.makeVideo(with: imagePaths)
+                if(format == "gif") {
+                    let images = try imagePaths.map{ NSImage(data: try Data(contentsOf: URL(fileURLWithPath: $0)))! }
+                   
+                    guard let url = NSImage.animatedGif(from: images) else {
+                        throw VideoExportError.failed("Failed gif export")
+                    }
+                    result(url.absoluteString);
+                    
+                }
+                else {
+                    try spitfire.makeVideo(with: imagePaths, format: format == "hevc" ? VideoDataFormat.hevc : VideoDataFormat.h264)
+                }
                 }
                 catch {
                   result(FlutterError(code: "FAILED_LOAD_IMAGE",
@@ -69,4 +82,8 @@ public class WidgetVideoRecorderPlugin: NSObject, FlutterPlugin, SpitfireDelegat
      self.videoResult = nil;
     }
   }
+}
+
+enum VideoExportError: Error {
+    case failed(String)
 }
